@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 def fetch_weather(city):
     api_url = "http://api.openweathermap.org/data/2.5/weather"
-    api_key = "6ac5af39301f0668769c919db8839f4e"
+    api_key = ""
     params = {"q": city, "appid": api_key, "units": "metric"}
     try:
         response = requests.get(api_url, params=params)
