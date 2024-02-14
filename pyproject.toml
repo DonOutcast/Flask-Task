@@ -1,0 +1,125 @@
+[tool.poetry]
+name = "flask-task"
+version = "0.1.0"
+description = ""
+authors = ["sh.aydin <sh.aydin@samolet.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+flask = "^3.0.2"
+requests = "^2.31.0"
+
+
+[tool.poetry.group.dev.dependencies]
+isort = "^5.13.2"
+black = "^24.2.0"
+absolufy-imports = "^0.3.1"
+ruff = "^0.2.1"
+autoflake = "^2.2.1"
+vulture = "^2.11"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.vulture]
+# Configuration for vulture: https://github.com/jendrikseipp/vulture
+# Install in your virtual environment and run:
+# vulture ./
+exclude = [
+  "gunicorn.conf.py",
+  "gunicorn.debug.conf.py",
+  "*/settings.py",
+  "*/settings/*.py",
+  "*/migrations/*.py",
+  "*/.venv/*",
+  "*/venv/*"
+]
+
+ignore_names = [
+]
+sort_by_size = true
+min_confidence = 80
+
+[tool.isort]
+line_length = 100
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+multi_line_output = 3
+profile = "black"
+src_paths = "."
+lines_after_imports = 2
+
+[tool.black]
+line-length = 100
+target-version = ['py311']
+exclude = '''
+(
+  \.eggs
+  |\.git
+  |\.hg
+  |\.mypy_cache
+  |\.nox
+  |\.tox
+  |\.venv
+  |\.pyc
+  |\.pyi
+  |_build
+  |buck-out
+  |build
+  |dist
+)
+'''
+
+
+[tool.autoflake]
+remove-all-unused-imports = true
+ignore-init-module-imports = true
+expand-star-imports = true
+remove-duplicate-keys = true
+
+[tool.ruff]
+# Версии python 3.11 -> py311
+target-version = "py312"
+
+# Включение авто исправления по умолчанию
+fix = true
+
+# Ограничение длины строки
+line-length = 120
+
+# Включенные плагины
+select = [
+    "F",   # pyflakes
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "UP",  # pyupgrade
+    "C90", # mccabe
+    "N",   # pep8-naming
+    "DJ",  # flake8-django
+    "C4",  # flake8-comprehensions
+    "B",   # flake8-bugbear
+    "T20", # flake8-print
+    "Q",   # flake8-quotes
+]
+
+# Исключения
+exclude = [
+    "eggs",
+    ".git",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".tox",
+    ".venv",
+    ".pyc",
+    ".pyi",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "migrations",
+]
+
+
